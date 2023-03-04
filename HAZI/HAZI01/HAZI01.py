@@ -6,11 +6,14 @@
 #input parameters: input_list,start_index,end_index
 
 # %%
+
 def subset(input_list,start_index,end_index):
     newlist = []
-    for index in range(start_index,end_index):
-        newlist.append(input_list[index])
-    return newlist
+    i = start_index
+    while(i <= end_index and i < len(input_list)):
+        newlist.append(input_list[i])
+        i +=1
+print(subset(a,0,2))
 
 # %%
 #Create a function that returns every nth element of a list.
@@ -19,12 +22,11 @@ def subset(input_list,start_index,end_index):
 #input parameters: input_list,step_size
 
 # %%
-def subset(input_list,step_size):
+def every_nth(input_list,step_size):
     newlist = []
     for index in range(0,len(input_list),step_size):
         newlist.append(input_list[index])
     return newlist
-
 # %%
 #Create a function that can decide whether a list contains unique values or not
 #return type: bool
@@ -86,8 +88,10 @@ def reverse_tuples(input_list):
 #input parameters: input_list
 
 # %%
+a=[1,2,3,3,4,5,6]
 def remove_tuplicates(input_list):
     return set(input_list)
+print(remove_tuplicates(a))
 
 # %%
 #Create a function that transposes a nested list (matrix)

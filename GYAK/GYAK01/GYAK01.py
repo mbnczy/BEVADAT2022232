@@ -25,12 +25,9 @@ def is_odd(input_list):
     for number in input_list:
        if number % 2 == 0:
            boollist.append(True)
-           print("true")
        else:
            boollist.append(False) 
-           print("false")
     return boollist
-
 # %%
 
 #Create a function that accpects 2 lists of integers and returns their element wise sum. <br>
@@ -45,7 +42,6 @@ def element_wise_sum(input_list_1, input_list_2):
     for a,b in zip(input_list_1,input_list_2):
         newlist.append(a + b)
     return newlist
-
 # %%
 #Create a function that accepts a dictionary and returns its items as a list of tuples
 #(return should look like this: [(key,value),(key,value),....])
@@ -55,7 +51,7 @@ def element_wise_sum(input_list_1, input_list_2):
 
 # %%
 def dict_to_list(input_dict):
-    return tuple(input_dict.items())
+    return list(input_dict.items())
 
 # %%
 #If all the functions are created convert this notebook into a .py file and push to your repo

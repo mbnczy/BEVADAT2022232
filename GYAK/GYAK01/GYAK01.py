@@ -6,11 +6,13 @@
 
 # %%
 def contains_odd(input_list):
-    for number in input_list:
-        if number % 2 == 0:
-            return True
-    return False
-
+    index=0
+    while(index<len(input_list) and input_list[index]%2==0):
+        index+=1
+    if index<len(input_list):
+        return True
+    else:
+        return False
 # %%
 #Create a function that accepts a list of integers, and returns a list of bool.
 #The return list should be a "mask" and indicate whether the list element is odd or not.
@@ -23,7 +25,7 @@ def contains_odd(input_list):
 def is_odd(input_list):
     boollist = []
     for number in input_list:
-       if number % 2 == 0:
+       if number % 2!=0:
            boollist.append(True)
        else:
            boollist.append(False) 

@@ -6,14 +6,13 @@
 #input parameters: input_list,start_index,end_index
 
 # %%
-
 def subset(input_list,start_index,end_index):
     newlist = []
     i = start_index
     while(i <= end_index and i < len(input_list)):
         newlist.append(input_list[i])
         i +=1
-
+    return newlist
 # %%
 #Create a function that returns every nth element of a list.
 #return type: list
@@ -88,7 +87,7 @@ def reverse_tuples(input_list):
 
 # %%
 def remove_tuplicates(input_list):
-    return set(input_list)
+    return list(set(input_list))
 
 # %%
 #Create a function that transposes a nested list (matrix)

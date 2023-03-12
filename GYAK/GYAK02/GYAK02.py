@@ -22,10 +22,10 @@ def create_array(tup: tuple = (2,2)) -> np.array:
     return zeroarray
 
 # %%
+
 def set_one(arr : np.array) -> np.array:
-    newarr=np.array(arr,int)
-    np.fill_diagonal(newarr,1)
-    return newarr
+    np.fill_diagonal(arr,1)
+    return arr
 
 
 # %%

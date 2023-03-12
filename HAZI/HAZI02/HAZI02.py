@@ -28,7 +28,7 @@ def column_swap(arr : np.array) -> np.array:
 
 # %%
 def compare_two_array(arr1 : np.array,arr2 : np.array) -> np.array:
-    return np.equal(np.array(arr1),np.array(arr2)).astype(int)
+    return np.flatnonzero(np.equal(np.array(arr1),np.array(arr2)).astype(int))
 
 # %%
 # Készíts egy olyan függvényt, ami vissza adja string-ként a megadott array dimenzióit:
@@ -42,7 +42,7 @@ def get_array_shape(arr) -> str:
     try:
         melyseg=len(arr[0][0]) 
     except: 
-        melyseg=0
+        melyseg=1
     return f"sor: {len(arr)}, oszlop: {len(arr[0])}, melyseg: {melyseg}"
 #print(get_array_shape([[1,2,3], [4,5,6]]))
 
@@ -93,7 +93,7 @@ def eval_classification(arr : np.array, lst : list) -> str:
 # repalce_odd_numbers()
 
 # %%
-def repalce_odd_numbers(arr : np.array)->np.array:
+def replace_odd_numbers(arr : np.array)->np.array:
     arr=np.array(arr)
     return np.where(arr%2==1,-1,arr)
     #arr[arr % 2 == 1] = -1
@@ -156,7 +156,7 @@ def add_border(arr : np.array) -> np.array:
 # A KÖTVETKEZŐ FELADATOKHOZ NÉZZÉTEK MEG A NUMPY DATA TYPE-JÁT!
 
 # %%
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 # %%
 # Készíts egy olyan függvényt ami két dátum között felsorolja az összes napot és ezt adja vissza egy numpy array-ben. A fgv ként str vár paraméterként 'YYYY-MM' formában.
@@ -166,15 +166,9 @@ from datetime import datetime, timedelta
 
 # %%
 def list_days(start_date:str, end_date:str)->np.array:
-    start_date = datetime.strptime(start_date, '%Y-%m')
-    end_date = datetime.strptime(end_date, '%Y-%m')
-    
-    delta = end_date - start_date
-    days = [start_date + timedelta(days) for days in range(delta.days + 1)]
-    
-    days_str = [day.strftime('%Y-%m-%d') for day in days]
-    
-    return np.array(days_str)
+  start_date = datetime.strptime(start_date, '%Y-%m')
+  end_date = datetime.strptime(end_date, '%Y-%m')
+  return np.arange(start_date,end_date,dtype = 'datetime64[D]')
 #print(list_days('2023-03', '2023-04'))
 
 # %%
@@ -187,8 +181,7 @@ def list_days(start_date:str, end_date:str)->np.array:
 
 import datetime
 def datenow()->str:
-    today = datetime.date.today()
-    return np.datetime64(today)
+    return date.today()
 #print(datenow())
 
 # %%

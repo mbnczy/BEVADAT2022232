@@ -38,12 +38,10 @@ def compare_two_array(arr1 : np.array,arr2 : np.array) -> np.array:
 # 3D-vel még műküdnie kell!, 
 
 # %%
-def get_array_shape(arr) -> str:
-    try:
-        melyseg=len(arr[0][0]) 
-    except: 
-        melyseg=1
-    return f"sor: {len(arr)}, oszlop: {len(arr[0])}, melyseg: {melyseg}"
+def get_array_shape(arr: np.array) -> str:
+    dim = np.shape(arr)
+    d = arr.ndim
+    return f"sor: {dim[0]}, oszlop: {dim[1] if d >1 else 1}, melyseg: {dim[2] if d > 2 else 1}"
 #print(get_array_shape([[1,2,3], [4,5,6]]))
 
 # %%
@@ -156,6 +154,7 @@ def add_border(arr : np.array) -> np.array:
 # A KÖTVETKEZŐ FELADATOKHOZ NÉZZÉTEK MEG A NUMPY DATA TYPE-JÁT!
 
 # %%
+import datetime as dt
 from datetime import datetime, timedelta, date
 
 # %%
@@ -165,11 +164,9 @@ from datetime import datetime, timedelta, date
 # list_days()
 
 # %%
-def list_days(start_date:str, end_date:str)->np.array:
-  start_date = datetime.strptime(start_date, '%Y-%m')
-  end_date = datetime.strptime(end_date, '%Y-%m')
-  return np.arange(start_date,end_date,dtype = 'datetime64[D]')
-#print(list_days('2023-03', '2023-04'))
+def list_days(start: dt.datetime, end: dt.datetime):
+  return np.arange(start,end,dtype = 'datetime64[D]')
+print(list_days('2023-03', '2023-04'))
 
 # %%
 # Írj egy függvényt ami vissza adja az aktuális dátumot az alábbi formában: YYYY-MM-DD. Térjen vissza egy 'numpy.datetime64' típussal.
@@ -180,9 +177,9 @@ def list_days(start_date:str, end_date:str)->np.array:
 # %%
 
 import datetime
-def datenow()->str:
+def get_act_date()->str:
     return date.today()
-#print(datenow())
+#print(get_act_date())
 
 # %%
 # Írj egy olyan függvényt ami visszadja, hogy mennyi másodperc telt el 1970 január 01. 00:02:00 óta. Int-el térjen vissza

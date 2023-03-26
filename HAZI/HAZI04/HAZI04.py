@@ -108,6 +108,7 @@ függvény neve: add_age
 # %%
 def add_age(df_data) -> pd.core.frame.DataFrame:
     newdf = df_data.copy()
+    np.random.seed(42)
     newdf['age']=np.random.randint(18,67,size=newdf.shape[0])
     return newdf
 #print(pd.DataFrame(add_age(df)).sort_values('age',ascending= False).to_markdown())

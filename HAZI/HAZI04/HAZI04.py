@@ -58,7 +58,7 @@ függvény neve: math_passed_count
 # %%
 def math_passed_count(df_data) -> int:
     newdf=df_data.copy()
-    return (newdf.loc[np.where(newdf['math score']>50)]).shape[0]
+    return (newdf.loc[np.where(newdf['math score']>=50)]).shape[0]
 #print(math_passed_count(df))
 
 # %%

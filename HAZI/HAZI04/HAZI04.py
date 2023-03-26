@@ -153,18 +153,22 @@ függvény neve: add_grade
 # %%
 def add_grade(df_data) -> pd.core.frame.DataFrame:
     newdf=df_data.copy()
+    grades=[]
     for i in range(len(newdf)):
-        newcol = 100*(newdf['math score'][i]+newdf['reading score'][i]+newdf['writing score'][i])/300
+        newcol = 100*(newdf['math score'][i]+
+                      newdf['reading score'][i]+
+                      newdf['writing score'][i])/300
         if newcol >= 90:
-            newdf['grade'] = 'A'
+            grades.append('A')
         elif newcol >= 80:
-            newdf['grade'] = 'B'
+            grades.append('B')
         elif newcol >= 70:
-            newdf['grade'] = 'C'
+            grades.append('C')
         elif newcol >= 60:
-            newdf['grade'] = 'D'
+            grades.append('D')
         else:
-            newdf['grade'] = 'F'
+            grades.append('F')
+    newdf['grade']=grades
     return newdf
 #print(add_grade(df).to_markdown())
 

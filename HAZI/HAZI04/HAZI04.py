@@ -126,11 +126,11 @@ függvény neve: female_top_score
 # %%
 def female_top_score(df_data) -> tuple:
     newdf=df_data.copy()
-    newdf=df.loc[np.where(newdf['gender']=='female')]
-    newdf['avg'] = newdf[['math score','reading score','writing score']].mean(axis=1)
-    #newdf=newdf.drop('index',1)
-    #list((newdf.sort_values('avg',ascending=False).head(1)).itertuples(index=True))
-    return list((newdf.sort_values('avg',ascending=False).head(1))[['math score','reading score','writing score']].itertuples(index=False,name=None))[0]
+    ndf= newdf.loc[newdf["gender"] == "female"].sort_values(["math score", "writing score", "reading score"],ascending=[False,False,False]).iloc[0]
+    return (ndf["math score"], ndf["writing score"], ndf["reading score"])
+    #newdf=df.loc[np.where(newdf['gender']=='female')]
+    #newdf['avg'] = newdf[['math score','reading score','writing score']].mean(axis=1)
+    #return list((newdf.sort_values('avg',ascending=False).head(1))[['math score','reading score','writing score']].itertuples(index=False,name=None))[0]
 #print(female_top_score(df)) 
 
 # %%

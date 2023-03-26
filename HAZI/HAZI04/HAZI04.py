@@ -192,9 +192,9 @@ def math_bar_plot(df_data):
     newdf = df_data.copy().groupby(['gender'])['math score'].mean()
     fig, ax=plt.subplots()
     ax.bar(newdf.index,newdf.values)
-    ax.set_title = 'Average Math Score by Gender'
-    ax.set_xlabel = 'Gender'
-    ax.set_ylabel = 'Math Score'
+    ax.set_title('Average Math Score by Gender')
+    ax.set_xlabel('Gender')
+    ax.set_ylabel('Math Score')
     return fig
 #plt.show(math_bar_plot(df))
 

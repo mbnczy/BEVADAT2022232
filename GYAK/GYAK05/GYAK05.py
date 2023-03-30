@@ -54,5 +54,3 @@ class KNNClassifier:
     def confusion_matrix(self):
         conf_matrix = confusion_matrix(self.y_test,self.y_preds)
         sns.heatmap(conf_matrix,annot=True) 
-
-    

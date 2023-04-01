@@ -22,27 +22,25 @@ class KNNClassifier:
         x, y = dataset[:, :-1], dataset[:, -1]
         return x, y
     
-    def train_test_split(self,
-                        features:np.ndarray,
-                        labels:np.ndarray) -> None:
+    def train_test_split(self,features:np.ndarray,labels:np.ndarray):
         test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
 
         assert len(features) == test_size + train_size, "size mismatch!"
 
-        self.x_train, self.y_train = features[:train_size,:],labels[:train_size]
-        self.x_test, self.y_test = features[train_size:,:],labels[train_size:]
+        self.x_train, self.y_train = features[:train_size, :], labels[:train_size]
+        self.x_test, self.y_test = features[train_size:train_size+test_size, :], labels[train_size:train_size+test_size]
     
-    def eucledian(self, element_of_x):
+    def eucledian(self, element_of_x:np.ndarray) -> np.ndarray:
         return np.sqrt(np.sum((self.x_train-element_of_x)**2,axis=1))
     
     def predict(self, x_test:np.ndarray):
         labels_pred = []
         for x_test_element in x_test:
-            distances = self.euclidean(x_test_element)
+            distances = self.euclidean( x_test_element)
             distances = np.array(sorted(zip(distances, self.y_train)))
 
-            label_pred = mode(distances[:self.k, 1], keepdims=False).mode
+            label_pred = mode(distances[:self.k,1], keepdims=False).mode
             labels_pred.append(label_pred)
 
         self.y_preds = np.array(labels_pred, dtype=np.int64)
@@ -53,4 +51,4 @@ class KNNClassifier:
     
     def confusion_matrix(self):
         conf_matrix = confusion_matrix(self.y_test,self.y_preds)
-        sns.heatmap(conf_matrix,annot=True) 
+        return conf_matrix

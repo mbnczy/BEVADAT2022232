@@ -20,6 +20,8 @@ class KNNClassifier:
         df = pd.read_csv(csv_path, header=None)
         df = df.sample(frac=1, random_state=42).reset_index(drop=True)
         x, y = df.iloc[:, :-1], df.iloc[:, -1]
+        x.fillna(3.5, inplace=True)
+        x = x.apply(pd.to_numeric, errors="coerce")
         return x, y
 
     def train_test_split(self, features: pd.DataFrame, labels: pd.Series) -> None:

@@ -18,7 +18,7 @@ class KNNClassifier:
 
     @staticmethod
     def load_csv(csv_path: str) -> Tuple[pd.DataFrame, pd.Series]:
-        df = pd.read_csv(csv_path, header=None)
+        df = pd.read_csv(csv_path, delimiter=",")
         df = df.sample(frac=1, random_state=42).reset_index(drop=True)
         x, y = df.iloc[:, :8], df.iloc[:, -1]
         # x.fillna(3.5, inplace=True)
@@ -42,7 +42,7 @@ class KNNClassifier:
     def predict(self, x_test):
         labels_pred = []
         for i in range(len(x_test)):
-            distances = self.euclidean(self, x_test.iloc[i]).tolist()
+            distances = self.euclidean(x_test.iloc[i]).tolist()
             for j in range(len(distances)):
                 distances[j] = (distances[j], self.y_train[j])
             distances.sort(key=lambda a: a[0])
@@ -56,7 +56,7 @@ class KNNClassifier:
         true_positive = (self.y_test == self.y_preds).sum()
         return true_positive / len(self.y_test) * 100
 
-    def plot_confusion_matrix(self):
+    def confusion_matrix(self):
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
         # sns.heatmap(conf_matrix, annot=True)
         return conf_matrix
@@ -65,8 +65,8 @@ class KNNClassifier:
         results = list()
         for i in range(1, 20):
             self.k = i
-            self.predict(self, self.x_test)
-            acc = round(self.accuracy(self), 2)
+            self.predict(self.x_test)
+            acc = round(self.accuracy(), 2)
             results.append((i, acc))
 
         return max(results, key=lambda item: item[1])

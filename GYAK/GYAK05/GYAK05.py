@@ -6,14 +6,14 @@ from sklearn.metrics import confusion_matrix
 
 
 class KNNClassifier:
-    def __init__(self, k: int, test_split_ratio: float):
-        self.k = k
-        self.test_split_ratio = test_split_ratio
-
     def get_k(self):
         return self.k
 
     k_neighbors = property(fget=get_k)
+
+    def __init__(self, k: int, test_split_ratio: float):
+        self.k = k
+        self.test_split_ratio = test_split_ratio
 
     @staticmethod
     def load_csv(csv_path: str) -> Tuple[np.ndarray, np.ndarray]:
@@ -44,7 +44,7 @@ class KNNClassifier:
     def predict(self, x_test: np.ndarray) -> np.ndarray:
         labels_pred = []
         for x_test_element in x_test:
-            distances = self.euclidean(self, x_test_element)
+            distances = self.euclidean(x_test_element)
             distances = np.array(sorted(zip(distances, self.y_train)))
             label_pred = mode(distances[: self.k, 1], keepdims=False).mode
             labels_pred.append(label_pred)

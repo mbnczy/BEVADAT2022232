@@ -30,3 +30,23 @@ class NJCleaner:
         )
         newdata.drop(["date"], axis=1, inplace=True)
         return newdata
+
+    def convert_scheduled_time_to_part_of_the_day(self) -> pd.DataFrame:
+        newdata = self.data.copy()
+        newdata["part_of_the_day"] = pd.to_datetime(
+            newdata["scheduled_time"], errors="coerce"
+        ).dt.hour.apply(
+            lambda x: "early_morning"
+            if 4 <= x <= 7
+            else "morning"
+            if 8 <= x <= 11
+            else "afternoon"
+            if 12 <= x <= 15
+            else "evening"
+            if 16 <= x <= 19
+            else "night"
+            if 20 <= x <= 23
+            else "late_night"
+        )
+        newdata.drop(["scheduled_time"], axis=1, inplace=True)
+        return newdata

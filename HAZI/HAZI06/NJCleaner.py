@@ -57,3 +57,6 @@ class NJCleaner:
             lambda x: 0 if 0 <= x and x < 5 else 1
         )
         return newdata
+
+    def save_first_60k(self, path: str):
+        self.data.head(60000).to_csv(path)

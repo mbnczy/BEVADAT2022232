@@ -50,3 +50,10 @@ class NJCleaner:
         )
         newdata.drop(["scheduled_time"], axis=1, inplace=True)
         return newdata
+
+    def convert_delay(self) -> pd.DataFrame:
+        newdata = self.data.copy()
+        newdata["delay"] = newdata["delay_minutes"].apply(
+            lambda x: 0 if 0 <= x and x < 5 else 1
+        )
+        return newdata

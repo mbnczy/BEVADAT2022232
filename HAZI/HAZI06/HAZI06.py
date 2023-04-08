@@ -51,3 +51,36 @@ HAZI-
 ##                                                              ##
 ##################################################################
 """
+import pandas as pd
+from src.DecisionTreeClassifier import DecisionTreeClassifier
+from NJCleaner import NJCleaner
+
+# train_id,stop_sequence,from_id,to_id,actual_time,delay_minutes,status,line,type,day,part_of_the_day,delay
+col_name = [
+    "train_id",
+    "stop_sequence",
+    "from_id",
+    "to_id",
+    "actual_time",
+    "delay_minutes",
+    "status",
+    "line",
+    "type",
+    "day",
+    "part_of_the_day",
+    "delay",
+]
+njc = NJCleaner("2018_03.csv")
+njc.prep_df("traindata.csv")
+# data = njc.order_by_scheduled_time()
+# data = njc.drop_columns_and_nan()
+# data = njc.convert_date_to_day()
+# data = njc.convert_scheduled_time_to_part_of_the_day()
+# data = njc.convert_delay()
+# try:
+#    data = njc.drop_unnecessary_columns()
+# except:
+#    print("data error")
+
+data = pd.read_csv("traindata.csv", skiprows=1, header=None, names=col_name)
+dtc = DecisionTreeClassifier(min_samples_split=3, max_depth=3)

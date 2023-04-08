@@ -70,7 +70,9 @@ col_name = [
     "part_of_the_day",
     "delay",
 ]
-njc = NJCleaner("2018_03.csv")
+njc = NJCleaner(
+    "/Users/banoczymartin/Library/Mobile Documents/com~apple~CloudDocs/OE/4/bevadat/lab/BEVADAT2022232/HAZI/HAZI06/2018_03.csv"
+)
 njc.prep_df("traindata.csv")
 # data = njc.order_by_scheduled_time()
 # data = njc.drop_columns_and_nan()
@@ -82,5 +84,10 @@ njc.prep_df("traindata.csv")
 # except:
 #    print("data error")
 
-data = pd.read_csv("traindata.csv", skiprows=1, header=None, names=col_name)
+data = pd.read_csv(
+    "/Users/banoczymartin/Library/Mobile Documents/com~apple~CloudDocs/OE/4/bevadat/lab/BEVADAT2022232/HAZI/HAZI06/traindata.csv",
+    skiprows=1,
+    header=None,
+    names=col_name,
+)
 dtc = DecisionTreeClassifier(min_samples_split=3, max_depth=3)

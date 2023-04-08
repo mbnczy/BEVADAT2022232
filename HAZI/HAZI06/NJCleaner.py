@@ -24,7 +24,7 @@ class NJCleaner:
         # self.data['day'] = days
         newdata = self.data.copy()
         newdata = newdata.assign(
-            day=self.data["date"].apply(
+            day=newdata["date"].apply(
                 lambda x: datetime.strptime(x, "%Y-%m-%d").strftime("%A")
             )
         )

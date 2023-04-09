@@ -61,7 +61,7 @@ class NJCleaner:
     def drop_unnecessary_columns(self) -> pd.DataFrame:
         newdata = self.data.copy()
         newdata.drop(
-            ["train_id" "scheduled_time" "actual_time" "delay_minutes"],
+            ["train_id", "actual_time", "delay_minutes"],
             axis=1,
             inplace=True,
         )

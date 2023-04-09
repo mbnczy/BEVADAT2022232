@@ -73,7 +73,9 @@ col_name = [
 njc = NJCleaner(
     "/Users/banoczymartin/Library/Mobile Documents/com~apple~CloudDocs/OE/4/bevadat/lab/BEVADAT2022232/HAZI/HAZI06/2018_03.csv"
 )
-njc.prep_df("traindata.csv")
+njc.prep_df(
+    "/Users/banoczymartin/Library/Mobile Documents/com~apple~CloudDocs/OE/4/bevadat/lab/BEVADAT2022232/HAZI/HAZI06/traindata.csv"
+)
 # data = njc.order_by_scheduled_time()
 # data = njc.drop_columns_and_nan()
 # data = njc.convert_date_to_day()
@@ -91,3 +93,5 @@ data = pd.read_csv(
     names=col_name,
 )
 dtc = DecisionTreeClassifier(min_samples_split=3, max_depth=3)
+
+print(data)

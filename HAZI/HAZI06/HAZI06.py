@@ -54,15 +54,14 @@ HAZI-
 import pandas as pd
 from src.DecisionTreeClassifier import DecisionTreeClassifier
 from NJCleaner import NJCleaner
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 # train_id,stop_sequence,from_id,to_id,actual_time,delay_minutes,status,line,type,day,part_of_the_day,delay
 col_name = [
-    "train_id",
     "stop_sequence",
     "from_id",
     "to_id",
-    "actual_time",
-    "delay_minutes",
     "status",
     "line",
     "type",
@@ -70,28 +69,27 @@ col_name = [
     "part_of_the_day",
     "delay",
 ]
-njc = NJCleaner(
-    "/Users/banoczymartin/Library/Mobile Documents/com~apple~CloudDocs/OE/4/bevadat/lab/BEVADAT2022232/HAZI/HAZI06/2018_03.csv"
-)
-njc.prep_df(
-    "/Users/banoczymartin/Library/Mobile Documents/com~apple~CloudDocs/OE/4/bevadat/lab/BEVADAT2022232/HAZI/HAZI06/traindata.csv"
-)
-# data = njc.order_by_scheduled_time()
-# data = njc.drop_columns_and_nan()
-# data = njc.convert_date_to_day()
-# data = njc.convert_scheduled_time_to_part_of_the_day()
-# data = njc.convert_delay()
-# try:
-#    data = njc.drop_unnecessary_columns()
-# except:
-#    print("data error")
+njc = NJCleaner("HAZI/HAZI06/2018_03.csv")
+njc.prep_df("HAZI/HAZI06/data.csv")
 
 data = pd.read_csv(
-    "/Users/banoczymartin/Library/Mobile Documents/com~apple~CloudDocs/OE/4/bevadat/lab/BEVADAT2022232/HAZI/HAZI06/traindata.csv",
+    "HAZI/HAZI06/data.csv",
     skiprows=1,
     header=None,
     names=col_name,
 )
-dtc = DecisionTreeClassifier(min_samples_split=3, max_depth=3)
 
-print(data)
+X = data.iloc[:, :-1].values
+Y = data.iloc[:, -1].values.reshape(-1, 1)
+X_train, X_test, Y_train, Y_test = train_test_split(
+    X, Y, test_size=0.2, random_state=41
+)
+print("splitted")
+
+dtree = DecisionTreeClassifier(min_samples_split=120, max_depth=18)
+print("dtc init")
+dtree.fit(X_train, Y_train)
+print("dtc fitted")
+Y_pred = dtree.predict(X_test)
+print("predicted")
+print(accuracy_score(Y_test, Y_pred))

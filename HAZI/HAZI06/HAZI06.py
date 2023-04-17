@@ -95,7 +95,7 @@ print("predicted")
 print(accuracy_score(Y_test, Y_pred))
 
 """
-A feltanítás paramétereinek először az órán használt értéket adtam meg.
+A feltanítás paramétereinek először az órán használt értékeket adtam meg.
 Számítottam arra, hogy nem lesz túl eredményes, az iris.csv 151 rekordból áll ami nagyon kevés 2018_03.csv-hez képest, 
 illetve csak 4 független változóból áll a tábla, míg a most használt táblában dupla ennyi volt. 
 A sokszoros rekordszám miatt jóval megnöveltem a min_samples_split értékét, 

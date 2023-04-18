@@ -16,7 +16,7 @@ class LinearRegression:
         self.epochs = epochs  # The number of iterations to perform gradient descent
     
 
-    def fit(self, X: np.array, y: np.array) -> list: 
+    def fit(self, X: np.array, y: np.array): 
         # Split the data into training and testing sets
         #self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         n = float(len(X)) # Number of elements in X
@@ -33,6 +33,7 @@ class LinearRegression:
             D_c = (-2/n) * sum(residuals)  # Derivative wrt c
             self.m = self.m + self.L * D_m  # Update m
             self.c = self.c + self.L * D_c  # Update c
+            print(self.m)
 
     def predict(self, X):
         pred = []

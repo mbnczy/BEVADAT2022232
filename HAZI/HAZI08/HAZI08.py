@@ -35,7 +35,7 @@ függvény neve: check_data
 
 # %%
 def check_data(iris)-> pd.DataFrame:
-    return pd.DataFrame(iris.data, columns=iris.feature_names)[["sepal width (cm)", "sepal length (cm)"]].head()
+    return pd.DataFrame(iris.data, columns=iris.feature_names).head(5)
 
 # %%
 ''' 

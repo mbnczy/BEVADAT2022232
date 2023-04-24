@@ -69,12 +69,12 @@ függvény neve: logistic_train_data
 
 # %%
 def logistic_train_data(iris):
-    X = iris.data[:,:2]
-    #y = (iris.target == 0).astype(np.int32)
-    y = iris.target
-    X = X[y != 2]
-    y = y[y != 2]
-    return X, y
+    df = pd.DataFrame(iris.data,columns=iris.feature_names)
+    df['target'] = iris.target
+    df.drop(df.loc[df['target'] == 2].index, inplace = True)
+    y= df['target']
+    X = df[['sepal length (cm)','sepal width (cm)', 'petal length (cm)','petal width (cm)']].values
+    return X,y
 # %%
 '''
 Készíts egy függvényt ami feldarabolja az adatainkat train és test részre. Az adatok 20%-át használjuk fel a teszteléshez.

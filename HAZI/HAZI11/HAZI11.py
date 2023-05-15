@@ -83,8 +83,9 @@ függvény neve: model_fit
 """
 
 
-def model_fit(model, epochs, train_images, train_labels):
-    return model.fit(train_images, train_labels, epochs=epochs)
+def model_fit(model: tf.keras.Sequential, epochs: int, train_images, train_labels):
+    model.fit(train_images, train_labels, epochs=epochs)
+    return model
 
 
 # %%
@@ -98,6 +99,6 @@ függvény neve: model_evaluate
 """
 
 
-def model_evaluate(model, test_images, test_labels):
-    test_loss, test_acc = model.evaluate(test_images, test_labels)
+def model_evaluate(model: tf.keras.Sequential, test_images, test_labels):
+    test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
     return test_loss, test_acc
